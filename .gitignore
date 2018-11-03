@@ -15,3 +15,5 @@ gradle/
 *.iws
 */out/*
 build/
+target/
+*.log
