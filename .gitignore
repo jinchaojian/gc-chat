@@ -1,0 +1,8 @@
+### IDEA Related Files ###
+*.iml
+.idea/
+target/
+
+### Log Files ###
+*.log
+
