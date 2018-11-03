@@ -17,4 +17,3 @@ gradle/
 build/
 target/
 *.log
-out/
