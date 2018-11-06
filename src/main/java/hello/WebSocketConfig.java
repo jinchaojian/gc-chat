@@ -25,9 +25,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/gs-guide-websocket").withSockJS();
+        registry.addEndpoint("/gs-guide-websocket")
+                .setHandshakeHandler(handshakeHandler()).setAllowedOrigins("*").withSockJS()
+//                .setClientLibraryUrl("//cdn.jsdelivr.net/sockjs/1/sockjs.min.js")
+                .setInterceptors(sessionAuthHandshakeInterceptor());
     }
-
+    @Bean
+    public SessionAuthHandshakeInterceptor sessionAuthHandshakeInterceptor() {
+        return new SessionAuthHandshakeInterceptor();
+    }
     @Bean
     public DefaultHandshakeHandler handshakeHandler() {
         return new DefaultHandshakeHandler() {
