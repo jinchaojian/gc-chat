@@ -107,4 +107,14 @@ public class WebSocketController {
     public boolean hasLogin(String principalName) {
         return principalNameUserNameMap.containsKey(principalName);
     }
+
+    /**
+     * 删除 SessionId 对应用户占用的 Nick
+     *
+     * @param sessionId
+     * @return
+     */
+    public String removeSessionIdFromNickMap(String sessionId) {
+        return principalNameUserNameMap.remove(sessionId);
+    }
 }

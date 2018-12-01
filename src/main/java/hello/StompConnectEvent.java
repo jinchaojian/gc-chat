@@ -20,16 +20,13 @@ public class StompConnectEvent implements ApplicationListener<SessionConnectEven
 
     @Override
     public void onApplicationEvent(SessionConnectEvent sessionConnectEvent) {
-        String token = "";
         try {
             StompHeaderAccessor sha = StompHeaderAccessor.wrap(sessionConnectEvent.getMessage());
             String wsSessionId = sessionConnectEvent.getUser().getName();
-            String adminId = sha.getSessionAttributes().get("userId").toString();
-            token = sha.getSessionAttributes().get("token").toString();
             String connSessionId = sha.getSessionId();
-            logger.info(String.format("Stomp Connect Info -> connSessionId: %s, wsSessionId: %s, adminId: %s", connSessionId, wsSessionId, adminId));
+            logger.info(String.format("Stomp Connect Info -> connSessionId: %s, wsSessionId: %s", connSessionId, wsSessionId));
         } catch (Exception e) {
-            String atoken = token;
+            logger.error("OnSessionConnectEvent error, sessionId: " + sessionConnectEvent.getUser().getName(), e);
         }
     }
 
